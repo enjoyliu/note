@@ -7,9 +7,13 @@
 **机器学习评测任务的一个样本，根据预测结果和标注结果的不同，有如下所示的四个类别：**
 
 | **真实\预测** | **正类** | **负类** |
+
 | ------------------- | -------------- | -------------- |
+
 | **正类**      | **TP**   | **FN**   |
+
 | **负类**      | **FP**   | **TN**   |
+
 
 **具体而言**
 
@@ -41,25 +45,28 @@
 
 **recall(召回率)，表示样本中的正类被正确预测为正例的比例，也叫查全率。以新冠检测为例，为一组检测中，阳性患者被正确检出的比例。**
 
-$$
-recall = \frac{TP}{TP+FN}
-$$
+
+<img src="https://www.zhihu.com/equation?tex=recall = \frac{TP}{TP+FN}
+" alt="recall = \frac{TP}{TP+FN}
+" class="ee_img tr_noresize" eeimg="1">
 
 ### precison
 
 **precison(精确率)，表示预测结果为正类的样本中，真正的正样本比例。以新冠检测为例，为一组检测中，检测结果为阳性的样本中确为阳性的比例。**
 
-$$
-precison = \frac{TP}{TP+FP}
-$$
+
+<img src="https://www.zhihu.com/equation?tex=precison = \frac{TP}{TP+FP}
+" alt="precison = \frac{TP}{TP+FP}
+" class="ee_img tr_noresize" eeimg="1">
 
 ### accuracy
 
 **accuracy(准确率)，表示分类正确的样本占总样本个数的比例。以新冠检测为例，为一组检测中，阳性检测为阳性，阴性检测为阴性的人数与全体检查人数的比值。**
 
-$$
-accuracy = \frac{TP+TN}{TP+FP+TN+FN}
-$$
+
+<img src="https://www.zhihu.com/equation?tex=accuracy = \frac{TP+TN}{TP+FP+TN+FN}
+" alt="accuracy = \frac{TP+TN}{TP+FP+TN+FN}
+" class="ee_img tr_noresize" eeimg="1">
 
 ## 3.进阶指标
 
@@ -69,9 +76,10 @@ $$
 
 **F1-score，为percision和recall的调和平均值，用以解决其二者矛盾的问题**
 
-$$
-F1=\frac{2*precision*recall}{precision+recall}
-$$
+
+<img src="https://www.zhihu.com/equation?tex=F1=\frac{2*precision*recall}{precision+recall}
+" alt="F1=\frac{2*precision*recall}{precision+recall}
+" class="ee_img tr_noresize" eeimg="1">
 
 ### 3.2 pr曲线
 
@@ -132,9 +140,10 @@ $$
 
 **mAP(mean Average Precision),AP为平均准确率，相当于pr曲线的面积，面积公式表示为，**
 
-$$
-AP = \int_0^1 p(r)dr
-$$
+
+<img src="https://www.zhihu.com/equation?tex=AP = \int_0^1 p(r)dr
+" alt="AP = \int_0^1 p(r)dr
+" class="ee_img tr_noresize" eeimg="1">
 
 **其中，**p(r)**表示precision随recall的变化函数。以为下图为例，pr曲线与坐标轴围成的面积为该组样本的AP值，因为precison和recall的值都在[0,1]区间，显然AP的值也在[0,1]区间。**
 
@@ -144,13 +153,15 @@ $$
 
 **在实践中一般用插值法进行近似求解，此处采用Pascal VOC竞赛中的VOC2010–2012方式求解，近似求解的公式为:**
 
-$$
-AP \approx \sum{(r_{n+1} - r_n) p_{interp}(r_{n+1})}  \tag{1.1}
-$$
 
-$$
-p_{interp}(r_{n+1}) = \max p( \widetilde r) {\quad}{\quad}{\quad} (\widetilde r \geq r_{n+1}) \tag{1.2}
-$$
+<img src="https://www.zhihu.com/equation?tex=AP \approx \sum{(r_{n+1} - r_n) p_{interp}(r_{n+1})}  \tag{1.1}
+" alt="AP \approx \sum{(r_{n+1} - r_n) p_{interp}(r_{n+1})}  \tag{1.1}
+" class="ee_img tr_noresize" eeimg="1">
+
+
+<img src="https://www.zhihu.com/equation?tex=p_{interp}(r_{n+1}) = \max p( \widetilde r) {\quad}{\quad}{\quad} (\widetilde r \geq r_{n+1}) \tag{1.2}
+" alt="p_{interp}(r_{n+1}) = \max p( \widetilde r) {\quad}{\quad}{\quad} (\widetilde r \geq r_{n+1}) \tag{1.2}
+" class="ee_img tr_noresize" eeimg="1">
 
 ![img](htTPs://raw.githubusercontent.com/weixiao619/pic/main/202205071914870.jpeg)
 
@@ -169,12 +180,19 @@ $$
 **混淆矩阵(confusion matrix)，也叫误差矩阵，用于直观的表示分类任务中各个类别的预测情况。**
 
 | **真实\预测** | **Cat** | **Dog** | **Pig** | **Tiger** | **Unknown** |
+
 | ------------------- | ------------- | ------------- | ------------- | --------------- | ----------------- |
+
 | **Cat**       | **15**  |               | **1**   |                 | **1**       |
+
 | **Dog**       | **1**   | **2**   | **1**   |                 |                   |
+
 | **Pig**       |               |               | **79**  | **5**     |                   |
+
 | **Tiger**     |               |               | **4**   | **15**    | **3**       |
+
 | **Unknown**   |               |               |               | **0**     | **0**       |
+
 
 **如上图所示为一个多分类问题的混淆矩阵，纵轴的标签表示某个样本的标注结果，横轴的标签表示某个样本的预测结果。以 [Cat,Cat]=15 为例，这一格表示，在给定的置信度阈值下，有15个标注结果为猫的框被正确分类； [Cat,Pig]=1 则表示，有一个标注结果为猫的框被错误预测为猪；而  [Cat,Unkonwn]=1 则表示，有一个标注结果为猫的样本，模型输出的所有预测结果均未超过给定的阈值，所以分类到Unkonw当中。需要注意的是：****这里的Unknow并非一个真实的标签。**
 
