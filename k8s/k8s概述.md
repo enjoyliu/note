@@ -169,11 +169,11 @@ RunScorePlugins()
 
 ```
 
-![image-20210602215451585](https://gitee.com/weixiao619/pic/raw/master/image-20210602215451585.png)
+![image-20210602215451585](https://github.com/weixiao619/pic/raw/main/image-20210602215451585.png)
 
 ### 代码逻辑
 
-![img](https://gitee.com/weixiao619/pic/raw/master/1599387171_7_w1514_h1290.png)
+![img](https://github.com/weixiao619/pic/raw/main/1599387171_7_w1514_h1290.png)
 
 1. **通过sched.NextPod()函数从优先队列中获取一个优先级最高的待调度Pod资源对象，如果没有获取到，那么该方法会阻塞住；**
 2. **通过sched.Algorithm.Schedule调度函数执行Predicates的调度算法与Priorities算法，挑选出一个合适的节点；**
@@ -184,7 +184,7 @@ RunScorePlugins()
 
 **根据上一节的内容可以看出k8s原生的调度器，在调度的最后阶段（打分）是串行的调度每个pod，但是在AI训练或者大数据处理的场景下，多个实例需要进行相互协作，此时，实际的需求为需要保证一组实例同时运行成功，而k8s原生调度器无法满足此需求，因此kube-batch分组调度器应运而生，Volcano调度器则基于kube-batch进行了进一步的优化。**
 
-![img](https://gitee.com/weixiao619/pic/raw/master/scheduler-20210605222117986.PNG)
+![img](https://github.com/weixiao619/pic/raw/main/scheduler-20210605222117986.PNG)
 
 **如图为Volcano调度器的工作流，一个job会打包多个pod形成一个PodGroup。**
 
@@ -226,25 +226,25 @@ RunScorePlugins()
 
 **以组为单位进行调度，**
 
-![image.png](https://gitee.com/weixiao619/pic/raw/master/1568282331579096.png)
+![image.png](https://github.com/weixiao619/pic/raw/main/1568282331579096.png)
 
 #### DRF (dominant resource fairss)
 
 **优先调度请求资源较少的实例，yarn和mesos均有对应调度Sunday**
 
-**	**![image.png](https://gitee.com/weixiao619/pic/raw/master/1568282358178951.png)
+**	**![image.png](https://github.com/weixiao619/pic/raw/main/1568282358178951.png)
 
 #### binpack
 
 **该调度算法尽量先填满已有节点，将负载聚拢到部分节点，有利于弹性伸缩，减少资源碎片**
 
-![image.png](https://gitee.com/weixiao619/pic/raw/master/1568282383798065.png)
+![image.png](https://github.com/weixiao619/pic/raw/main/1568282383798065.png)
 
 #### proportion(队列)
 
 **与yarn的capacity Scheduler调度器类似，根据组织分配资源比例，在组织内部使用FIFO的队列模式进行资源调度**
 
-![image.png](https://gitee.com/weixiao619/pic/raw/master/1568282412649140-20210605213707655.png)
+![image.png](https://github.com/weixiao619/pic/raw/main/1568282412649140-20210605213707655.png)
 
 #### 最终优选
 
@@ -271,13 +271,13 @@ RunScorePlugins()
 
 **CRI将kubelet与容器运行时解耦：**
 
-![image-20210603161339399](https://gitee.com/weixiao619/pic/raw/master/image-20210603161339399.png)
+![image-20210603161339399](https://github.com/weixiao619/pic/raw/main/image-20210603161339399.png)
 
 #### 架构
 
 **kubelet通过CRI结构与实际的container runtime进行交互，解耦不同容器的实现细节。如下为容器运行时的具体架构：**
 
-![image-20210603161320110](https://gitee.com/weixiao619/pic/raw/master/image-20210603161320110.png)
+![image-20210603161320110](https://github.com/weixiao619/pic/raw/main/image-20210603161320110.png)
 
 **容器运行时主要定义了CRI Server和Streaming Server两个服务，其中CRI Server实现了具体的CRI服务接口，由Runtime Service和 Image Manger Service两个服务组成，具体的实现可参考下文中的源码分析。**
 
@@ -287,7 +287,7 @@ RunScorePlugins()
 
 #### 交互
 
-![image-20210605201715782](https://gitee.com/weixiao619/pic/raw/master/image-20210605201715782.png)
+![image-20210605201715782](https://github.com/weixiao619/pic/raw/main/image-20210605201715782.png)
 
 #### CRI接口定义源码
 
@@ -473,7 +473,7 @@ type CNI interface {
 
 **kubefed(Kubernetes Cluster Federation)是k8s社区给出的解决方案，提供了跨集群资源和网络管理的功能**
 
-![concepts.png](https://gitee.com/weixiao619/pic/raw/master/concepts.png)
+![concepts.png](https://github.com/weixiao619/pic/raw/main/concepts.png)
 
 ### 应用场景
 
@@ -495,7 +495,7 @@ type CNI interface {
 
 ## 调度算法的演进
 
-![image-20210605221823380](https://gitee.com/weixiao619/pic/raw/master/image-20210605221823380.png)
+![image-20210605221823380](https://github.com/weixiao619/pic/raw/main/image-20210605221823380.png)
 
 1. **单阶段**
    **使用一个单一的中心化调度器，调度所有资源，同时没有并发，但是集群规模过大时无法很好的处理。同时新增调度的规则变得十分困难，因为所有的用户资源使用同样的调度逻辑。**
@@ -522,7 +522,7 @@ type CNI interface {
 
 #### 集群行为
 
-![image-20210605115450361](https://gitee.com/weixiao619/pic/raw/master/image-20210605115450361.png)
+![image-20210605115450361](https://github.com/weixiao619/pic/raw/main/image-20210605115450361.png)
 
 #### 集中调度
 
@@ -558,9 +558,9 @@ type CNI interface {
 
 ### Borg
 
-![image-20210605222630812](https://gitee.com/weixiao619/pic/raw/master/image-20210605222630812.png)
+![image-20210605222630812](https://github.com/weixiao619/pic/raw/main/image-20210605222630812.png)
 
-![image-20210605222841624](https://gitee.com/weixiao619/pic/raw/master/image-20210605222841624.png)
+![image-20210605222841624](https://github.com/weixiao619/pic/raw/main/image-20210605222841624.png)
 
 **如图所示为Borg的架构**
 
